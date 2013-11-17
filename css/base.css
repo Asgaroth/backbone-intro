@@ -1,0 +1,53 @@
+.content {
+    width: 500px;
+    margin: 0 auto;
+}
+
+section {
+    border-top: 1px black solid;
+    margin-top: 20px
+}
+
+.form {
+    padding: 20px
+}
+
+.form .acciones {
+    margin-left: 100px;
+}
+
+.comentario {
+    border-bottom: 1px dotted black;
+    padding-bottom: 5px;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+label {
+    float: left;
+    width: 100px;
+}
+
+button.close {
+    float: right;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}
