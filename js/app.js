@@ -31,6 +31,7 @@ jQuery(document).ready(function($) {
 var App = App || {};
 
 App.ComentarioView = Backbone.View.extend({
+    className: 'comentario',
     template: _.template($('#comentario-tpl').html()),
     render : function() {
         var html = this.template( this.model );
