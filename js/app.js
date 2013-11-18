@@ -7,15 +7,16 @@ jQuery(document).ready(function($) {
     $('#nuevo-comentario').submit(function(event) {
         event.preventDefault();
 
-        var nombreHtml = $('<h4></h4>').text(nombre.val());
-        var cuerpotHtml = $('<p></p>').text(comentario.val());
+        var modeloComentario = {
+            nombre: nombre.val(),
+            cuerpo: comentario.val()
+        };
 
-        var comentarioHtml = $('<div class="comentario"><button type="button" class="close">&times;</button></div>');
+        var nuevoComentario = new App.ComentarioView({
+            model: modeloComentario
+        });
 
-        comentarioHtml.append(nombreHtml);
-        comentarioHtml.append(cuerpotHtml);
-
-        comentarios.append(comentarioHtml);
+        comentarios.append(nuevoComentario.render().el);
 
         nombre.val('').focus();
         comentario.val('');
@@ -25,4 +26,15 @@ jQuery(document).ready(function($) {
     comentarios.on('click', '.close', function(){
         $(this).closest('.comentario').remove();
     });
+});
+
+var App = App || {};
+
+App.ComentarioView = Backbone.View.extend({
+    template: _.template($('#comentario-tpl').html()),
+    render : function() {
+        var html = this.template( this.model );
+        this.$el.html( html );
+        return this;
+    }
 });
