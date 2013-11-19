@@ -1,34 +1,45 @@
 jQuery(document).ready(function($) {
+    var blog = new App.BlogView();
+});
 
-    var nombre = $('#nombre');
-    var comentario = $('#comentario');
-    var comentarios = $('#comentarios');
+var App = App || {};
 
-    $('#nuevo-comentario').submit(function(event) {
-        event.preventDefault();
+App.BlogView = Backbone.View.extend({
+    el: '#blogapp',
+
+    events: {
+        'submit #nuevo-comentario': 'crearComentario',
+        'click .close': 'eliminarComentario'
+    },
+
+    initialize : function() {
+        this.nombre = this.$('#nombre');
+        this.comentario = this.$('#comentario');
+        this.comentarios = this.$('#comentarios');
+    },
+
+    crearComentario : function(e) {
+        e.preventDefault();
 
         var modeloComentario = {
-            nombre: nombre.val(),
-            cuerpo: comentario.val()
+            nombre: this.nombre.val(),
+            cuerpo: this.comentario.val()
         };
 
         var nuevoComentario = new App.ComentarioView({
             model: modeloComentario
         });
 
-        comentarios.append(nuevoComentario.render().el);
+        this.comentarios.append(nuevoComentario.render().el);
 
-        nombre.val('').focus();
-        comentario.val('');
+        this.nombre.val('').focus();
+        this.comentario.val('');
+    },
 
-    });
-
-    comentarios.on('click', '.close', function(){
-        $(this).closest('.comentario').remove();
-    });
+    eliminarComentario : function(e) {
+        $(e.currentTarget).closest('.comentario').remove();
+    }
 });
-
-var App = App || {};
 
 App.ComentarioView = Backbone.View.extend({
     className: 'comentario',
